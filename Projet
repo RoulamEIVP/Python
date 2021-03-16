@@ -1,0 +1,89 @@
+def min(L):
+    if type(L)!=list :
+        return 'erreur, veuillez entrer une liste'
+    else :
+        min=L[0]
+        for x in L :
+            if x<=min:
+                min = x
+    return min
+    
+def max(L):
+    if type(L)!=list :
+        return 'erreur, veuillez entrer une liste'
+    else :
+        min=L[0]
+        for x in L :
+            if x>=min:
+                min = x
+    return min
+    
+def moyenne(L):
+    S=0
+    for l in L :
+        S=S+l
+    return S/len(L)
+
+def variance(L):
+    m=moyenne(L)
+    v=0
+    for i in range(0,len(L)):
+        v=v+(L[i]-m)**2
+    return(v/len(L))
+
+import csv
+import datetime
+import matplotlib.pyplot as plt
+
+file=open("C:/Users/roule/Desktop/Cours EIVP/info/post-32566-EIVP_KM.csv","r")
+
+noise=[]
+temp=[]
+hum=[]
+lum=[]
+co2=[]
+t=[]
+
+def convert_string_to_time(date_string):
+    from datetime import datetime
+    import pytz
+    date_time_obj = datetime.strptime(date_string[:19], '%Y-%m-%d %H:%M:%S')
+
+    return date_time_obj
+    
+# print(convert_string_to_time('2018-08-14 13:09:24.543953+00:00'))
+# date = '2018-08-14 13:09:24.543953+00:00'
+# TIME_ZONE = 'UTC'
+# convert_string_to_time(date, TIME_ZONE)
+
+fichier = csv.reader(file, delimiter =';')
+for ligne in fichier:
+    
+        try:
+            noise.append(float(ligne[2]))
+            temp.append(float(ligne[3]))
+            hum.append(float(ligne[4]))
+            lum.append(float(ligne[5]))
+            co2.append(float(ligne[6]))
+            t.append(convert_string_to_time(ligne[7]))
+        except:
+            pass
+
+        
+# plt.plot(t,temp)
+plt.show()
+    
+# print(t)
+# print(co2)
+
+# col=[]
+# for row in reader:
+#     try:
+#         notation_point = row[n].replace(",",".")
+#         col.append(float(notation_point))
+#     except:
+#         pass
+# file.close()
+# 
+# file.close()
+# print (col)
